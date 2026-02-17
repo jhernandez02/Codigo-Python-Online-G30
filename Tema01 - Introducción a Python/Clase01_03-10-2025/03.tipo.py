@@ -1,0 +1,10 @@
+dato1 = None    # Nulo
+dato2 = 2       # Entero
+dato3 = 1.3     # Decimal
+dato4 = False   # Booleano
+dato5 = "texto" # Cadena de texto
+dato6 = 3 + 4j  # Complejo
+dato7 = (1,3,3) # Tupla
+dato8 = [1,2,3] # Lista
+dato9 = {1,2}   # Set (conjunto)
+dato10 = {"A":"1","B":"2"}  # Diccionario
