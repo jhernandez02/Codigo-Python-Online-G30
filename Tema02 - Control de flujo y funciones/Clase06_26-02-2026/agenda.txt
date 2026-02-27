@@ -1,0 +1,3 @@
+[Luis,luis@mail.com,987532135]
+[Karen,karen@mail.com,987532178]
+[Pedro,pedro@mail.com,987532100]
