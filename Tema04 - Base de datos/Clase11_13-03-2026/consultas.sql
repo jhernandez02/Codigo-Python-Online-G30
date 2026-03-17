@@ -3,9 +3,6 @@ DROP TABLE citas;
 DROP TABLE pacientes;
 DROP TABLE doctores;
 
-# Limpiamos todo los registros de la tabla citas
-TRUNCATE TABLE citas;
-
 # Insertar registros en la tabla pacientes
 INSERT INTO pacientes (nombre,correo,telefono) VALUES 
 ('Ana Gomez', 'ana.gomez@mail.com','555-1234'),
@@ -68,3 +65,8 @@ SELECT COUNT(*) FROM citas WHERE fecha_cita BETWEEN '2026-03-01' AND '2026-03-31
 # Formateamos la fecha de las citas
 SELECT doctor_id, paciente_id, to_char(fecha_cita, 'DD/MM/YYYY'), estado FROM citas;
 
+# Eliminamos un registro de una cita
+DELETE FROM cita WHERE doctor_id=2 AND paciente_id=1;
+
+# Limpiamos todo los registros de la tabla citas
+TRUNCATE TABLE citas;
