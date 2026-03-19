@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(
-        dbname='',
+        dbname='api-flask',
         user='postgres',
         password='root',
         host='localhost',
@@ -32,6 +32,8 @@ def create_user_table():
     except Exception as e:
         print('Error creating table user:', e)
 
+create_user_table()
+
 @app.route('/')
 def home():
     return 'API REST con Flask 🐍'
@@ -44,8 +46,17 @@ def get_users():
     users = cur.fetchall()
     cur.close()
     conn.close()
-    print(users)
-    return []
+
+    users_list = []
+    for user in users:
+        users_list.append({
+            'id': user[0],
+            'name': user[1],
+            'email': user[2],
+            'created_at': str(user[3])
+        })
+
+    return users_list
 
 if __name__ == '__main__':
     app.run(debug=True)
