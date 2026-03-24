@@ -2,7 +2,12 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, Text
 import bcrypt
-from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token
+from flask_jwt_extended import (
+    JWTManager,
+    create_access_token,
+    create_refresh_token,
+    jwt_required,
+)
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -26,6 +31,7 @@ with app.app_context():
     db.create_all()
 
 @app.route('/users', methods=['POST', 'GET'])
+@jwt_required()
 def users():
     method = request.method
     try:
@@ -83,10 +89,10 @@ def login():
             raise Exception('Invalid credentials')
 
         access_token = create_access_token(
-            identity=user.id
+            identity=str(user.id)
         )
         refresh_token = create_refresh_token(
-            identity=user.id
+            identity=str(user.id)
         )
 
         return {
