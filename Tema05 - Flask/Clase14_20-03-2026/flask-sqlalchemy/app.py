@@ -79,6 +79,9 @@ def user(user_id: int):
             data = request.get_json()
             user = User.query.get(user_id)
 
+            if not user:
+                raise Exception('User not found')
+
             user.name = data.get('name')
             user.email = data.get('email')
             user.password = data.get('password')
@@ -89,6 +92,18 @@ def user(user_id: int):
                 'name': user.name,
                 'email': user.email,
                 'created_at': str(user.created_at)
+            }
+        if method == 'DELETE':
+            user = User.query.get(user_id)
+            
+            if not user:
+                raise Exception('User not found')
+            
+            db.session.delete(user)
+            db.session.commit()
+
+            return {
+                'message': 'Used deleted'
             }
     except Exception as e:
         return {
