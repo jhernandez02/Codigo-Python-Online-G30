@@ -2,12 +2,18 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, Text
 import bcrypt
+from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token
+from datetime import timedelta
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/flask-auth'
+app.config['JWT_SECRET_KEY'] = 'secret'
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
+app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(weeks=1)
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -52,6 +58,41 @@ def users():
                 'name': created_user.name,
                 'email': created_user.email
             }
+    except Exception as e:
+        return {
+            'message': str(e)
+        }, 400
+
+@app.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        
+        user = User.query.filter_by(
+            email=data.get('email')
+        ).first()
+
+        if not user:
+            raise Exception('Invalid credentials')
+        
+        bytes_user_password = user.password.encode('utf-8')
+        bytes_data_password = data.get('password').encode('utf-8')
+        is_correct_password = bcrypt.checkpw(bytes_data_password, bytes_user_password)
+
+        if not is_correct_password:
+            raise Exception('Invalid credentials')
+
+        access_token = create_access_token(
+            identity=user.id
+        )
+        refresh_token = create_refresh_token(
+            identity=user.id
+        )
+
+        return {
+            'access_token': access_token,
+            'refresh_token': refresh_token
+        }
     except Exception as e:
         return {
             'message': str(e)
