@@ -27,9 +27,11 @@ def register():
     except ValidationError as e:
         return {
             'error': e.errors()
-        }
+        }, 400
     except Exception as e:
-        return str(e)
+        return {
+            'error': str(e)
+        }, 400
 
 if __name__ == '__main__':
     app.run(debug=True)
