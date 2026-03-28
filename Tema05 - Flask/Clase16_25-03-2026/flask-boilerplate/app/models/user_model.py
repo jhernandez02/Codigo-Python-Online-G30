@@ -7,6 +7,7 @@ from sqlalchemy import (
     DateTime,
     Text,
     func,
+    ForeignKey,
 )
 
 class User(db.Model):
@@ -18,3 +19,4 @@ class User(db.Model):
     password = Column(Text)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.now())
+    role_id = Column(Integer, ForeignKey('roles.id'))
