@@ -13,6 +13,11 @@ pip install flask-cors
 pip install flask-jwt-extended
 pip install python-dotenv
 pip install flask-migrate
+pip install bcrypt
+```
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Migraciones

@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+from pydantic import ValidationError
 from app.schemas.role_schema import RoleSchema
 from app.services.role_service import role_service
 
@@ -8,10 +9,17 @@ class RoleResource(Resource):
         try:
             json = request.get_json()
             validated_data = RoleSchema.model_validate(json)
-            role_service.create(validated_data)
+            role = role_service.create(validated_data)
 
-            return 'Ok'
+            return {
+                'id': role.id,
+                'name': role.name
+            }, 200
+        except ValidationError as e:
+            return {
+                'error': e.errors()
+            }, 400
         except Exception as e:
             return {
                 'error': str(e)
-            }
+            }, 400
