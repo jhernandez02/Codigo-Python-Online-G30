@@ -9,6 +9,7 @@ from sqlalchemy import (
     func,
     ForeignKey,
 )
+from sqlalchemy.orm import relationship
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -20,6 +21,8 @@ class User(db.Model):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.now())
     role_id = Column(Integer, ForeignKey('roles.id'))
+
+    role = relationship('Role', back_populates='users')
 
     def to_json(self):
         return {
