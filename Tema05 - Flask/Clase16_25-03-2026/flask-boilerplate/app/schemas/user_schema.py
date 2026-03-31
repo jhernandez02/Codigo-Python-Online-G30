@@ -1,7 +1,13 @@
 from pydantic import BaseModel
+from typing import Optional
 
-class UserSchema(BaseModel):
+class BaseUserSchema(BaseModel):
     name: str
     email: str
-    password: str
     role_id: int
+
+class CreateUserSchema(BaseUserSchema):
+    password: str
+
+class UpdateUserSchema(BaseUserSchema):
+    password: Optional[str] = None

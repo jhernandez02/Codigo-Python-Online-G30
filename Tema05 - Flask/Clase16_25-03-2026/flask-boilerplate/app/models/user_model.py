@@ -20,3 +20,11 @@ class User(db.Model):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.now())
     role_id = Column(Integer, ForeignKey('roles.id'))
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'role_id': self.role_id
+        }
