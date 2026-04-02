@@ -6,8 +6,6 @@ from app.schemas.user_schema import (
     CreateUserSchema,
     UpdateUserSchema
 )
-from flask_jwt_extended import jwt_required
-from app.resources.auth_resource import admin_required
 import bcrypt
 
 def hash_password(password: str) -> str:
@@ -19,7 +17,6 @@ def hash_password(password: str) -> str:
     return hashed_password.decode('utf-8')
 
 class UserResource(Resource):
-    @admin_required()
     def get(self):
         try:
             users = user_service.get_all()
@@ -32,7 +29,6 @@ class UserResource(Resource):
                 'error': str(e)
             }, 400
 
-    @jwt_required()
     def post(self):
         try:
             json = request.get_json()

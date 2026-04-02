@@ -10,6 +10,7 @@ class UserService:
     def create(self, data: CreateUserSchema):
         user = User(
             name=data.name,
+            last_name=data.last_name,
             email=data.email,
             password=data.password,
             role_id=data.role_id
@@ -20,6 +21,7 @@ class UserService:
 
     def update(self, user: User, data: CreateUserSchema):
         user.name = data.name
+        user.last_name = data.last_name
         user.email = data.email
         user.role_id = data.role_id
 

@@ -3,6 +3,7 @@ from typing import Optional
 
 class BaseUserSchema(BaseModel):
     name: str
+    last_name: str
     email: str
     role_id: int
 
