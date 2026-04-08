@@ -4,7 +4,7 @@ from db import db
 
 
 class ProductService:
-    def get_all(self):
+    def get_all(self) -> list[Product]:
         products = Product.query.filter_by(
             is_active=True
         )
@@ -36,6 +36,32 @@ class ProductService:
             Product.id.desc()
         ).first()
         return product
+    
+    def get_by_id(self, id: int) -> Product | None:
+        product = Product.query.filter_by(
+            id=id,
+            is_active=True
+        ).first()
+        return product
+    
+    def update(self, product: Product, data: ProductSchema, image: str | None = None) -> Product:
+        if image:
+            product.image = image
+        product.name = data.name
+        product.description = data.description
+        product.brand = data.brand
+        product.size = data.size
+        product.price = data.price
+        product.stock = data.stock
+        product.category_id = data.category_id
+
+        db.session.commit()
+        return product
+    
+    def delete(self, product: Product) -> None:
+        product.is_active = False
+        db.session.commit()
+        return None
 
 
 product_service = ProductService()
