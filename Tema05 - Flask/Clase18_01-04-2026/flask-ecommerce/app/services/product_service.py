@@ -10,12 +10,17 @@ class ProductService:
         )
         return products
     
-    def create(self, data: ProductSchema) -> Product:
+    def create(
+            self,
+            data: ProductSchema,
+            code: str,
+            image: str
+        ) -> Product:
         product = Product(
             name=data.name,
-            code='',
+            code=code,
             description=data.description,
-            image='',
+            image=image,
             brand=data.brand,
             size=data.size,
             price=data.price,
@@ -24,6 +29,12 @@ class ProductService:
         )
         db.session.add(product)
         db.session.commit()
+        return product
+    
+    def get_last(self) -> Product | None:
+        product = Product.query.order_by(
+            Product.id.desc()
+        ).first()
         return product
 
 

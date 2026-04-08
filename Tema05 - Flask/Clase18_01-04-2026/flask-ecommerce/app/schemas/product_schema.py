@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 
 class ProductSchema(BaseModel):
     name: str = Field(..., min_length=2, max_length=255, description='Nombre del producto')
-    code: str = Field(..., min_length=3, max_length=20, description='Codigo del producto')
     description: str = Field(..., min_length=2, max_length=255, description='Descripcion del producto')
     brand: str
     size: str

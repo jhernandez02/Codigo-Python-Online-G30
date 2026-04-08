@@ -24,3 +24,17 @@ class Product(db.Model):
     stock = Column(Integer)
     is_active = Column(Boolean, default=True)
     category_id = Column(Integer, ForeignKey('categories.id'))
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'code': self.code,
+            'description': self.description,
+            'image': self.image,
+            'brand': self.brand,
+            'size': self.size,
+            'price': str(self.price),
+            'stock': self.stock,
+            'category_id': self.category_id
+        }

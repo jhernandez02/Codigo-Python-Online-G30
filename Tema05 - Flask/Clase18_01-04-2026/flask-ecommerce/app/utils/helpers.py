@@ -3,6 +3,7 @@ import cloudinary
 import cloudinary.uploader
 import os
 
+
 class CloudinaryHelper:
     def __init__(self):
         cloudinary.config(

@@ -43,9 +43,19 @@ class ProductResource(Resource):
                     'error': 'Error uploading image'
                 }, 400
             
-            product = product_service.create(validated_data)
+            next_code ='P-0001'
+            product = product_service.get_last()
+            if product:
+                code = product.code
+                next_code = 'P-' + str(int(code.split('-')[1]) + 1).zfill(4)
+            
+            product = product_service.create(
+                validated_data,
+                next_code,
+                public_id
+            )
 
-            return 'Ok', 200
+            return product.to_json(), 200
         except ValidationError as e:
             return {
                 'error': e.errors()

@@ -17,6 +17,5 @@ class Category(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'name': self.name,
-            'is_active': self.is_active
+            'name': self.name
         }
