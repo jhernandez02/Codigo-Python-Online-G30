@@ -2,6 +2,8 @@ from flask_restful import Resource
 from flask import request
 from app.schemas.sale_schema import SaleSchema
 from app.services.sale_service import sale_service
+from pydantic import ValidationError
+from db import db
 
 class SaleResource(Resource):
     def get(self):
@@ -26,7 +28,12 @@ class SaleResource(Resource):
             sale = sale_service.create(validated_data)
 
             return sale.to_json(), 200
+        except ValidationError as e:
+            return {
+                'error': e.errors()
+            }, 400
         except Exception as e:
+            db.session.rollback()
             return {
                 'error': str(e)
             }, 400
