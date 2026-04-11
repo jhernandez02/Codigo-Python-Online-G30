@@ -39,4 +39,17 @@ class CloudinaryHelper:
         except Exception as e:
             return False
         
+    def get_secure_url(
+        self,
+        public_id: str
+    ) -> str:
+        try:
+            secure_url = cloudinary.utils.cloudinary_url(
+                public_id,
+                secure=True
+            )
+            return secure_url[0]
+        except Exception as e:
+            return None
+        
 cloudinary_helper = CloudinaryHelper()

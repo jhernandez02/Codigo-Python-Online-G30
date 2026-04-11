@@ -9,6 +9,7 @@ from sqlalchemy import (
     ForeignKey,
 )
 from sqlalchemy.orm import relationship
+from app.utils.helpers import cloudinary_helper
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -31,7 +32,7 @@ class Product(db.Model):
             'name': self.name,
             'code': self.code,
             'description': self.description,
-            'image': self.image,
+            'image': cloudinary_helper.get_secure_url(self.image),
             'brand': self.brand,
             'size': self.size,
             'price': str(self.price),

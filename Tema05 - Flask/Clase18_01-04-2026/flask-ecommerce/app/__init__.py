@@ -4,8 +4,10 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from db import db
 from app.models import role_model, user_model
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(Config)
 db.init_app(app)
 migrate = Migrate(app, db)
