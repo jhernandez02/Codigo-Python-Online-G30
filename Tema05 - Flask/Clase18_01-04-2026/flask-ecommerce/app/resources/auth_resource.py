@@ -64,7 +64,12 @@ class LoginResource(Resource):
                 }, 401
             
             access_token = create_access_token(
-                identity=str(user.id)
+                identity=str(user.id),
+                additional_claims={
+                    'name': user.name,
+                    'last_name': user.last_name,
+                    'email': user.email
+                }
             )
             refresh_token = create_refresh_token(
                 identity=str(user.id)
