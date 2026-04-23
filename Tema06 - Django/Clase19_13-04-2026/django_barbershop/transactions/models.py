@@ -14,7 +14,7 @@ class Appointments(models.Model):
         ('CANCELLED', 'CANCELLED'),
     )
     appointment_date = models.DateTimeField()
-    status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS)
+    status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS, default='PENDING')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     customer = models.ForeignKey(

@@ -8,6 +8,14 @@ from services.views import (
     SchedulesView,
     ManageSchedulesView,
 )
+from authentication.views import (
+    RolesView,
+    ManageRolesView,
+    UserView,
+    ManageUserView,
+    UserRoleView,
+)
+from transactions.views import AppointmentsView
 
 urlpatterns = [
     path('services/', ServicesView.as_view()),
@@ -19,4 +27,12 @@ urlpatterns = [
 
     path('schedules/', SchedulesView.as_view()),
     path('schedules/<int:pk>/', ManageSchedulesView.as_view()),
+
+    path('roles/', RolesView.as_view()),
+    path('roles/<int:pk>/', ManageRolesView.as_view()),
+    path('users/', UserView.as_view()),
+    path('users/<int:pk>/', ManageUserView.as_view()),
+    path('users/roles/', UserRoleView.as_view()),
+
+    path('appointments/', AppointmentsView.as_view()),
 ]
