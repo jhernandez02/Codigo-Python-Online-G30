@@ -122,3 +122,8 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+NUBEFACT = {
+    'URL': os.getenv('NUBEFACT_URL'),
+    'TOKEN': os.getenv('NUBEFACT_TOKEN')
+}
