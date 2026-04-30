@@ -15,32 +15,39 @@ from drf_spectacular.types import OpenApiTypes
 from datetime import time
 from rest_framework.permissions import IsAuthenticated
 
+@extend_schema(tags=['Servicios'])
 class ServicesView(generics.ListCreateAPIView):
     queryset = Services.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [IsAuthenticated]
 
+@extend_schema(tags=['Servicios'])
 class ManageServicesView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Services.objects.all()
     serializer_class = ServiceSerializer
 
+@extend_schema(tags=['Servicios'])
 class BarbersView(generics.ListCreateAPIView):
     queryset = Barbers.objects.all()
     serializer_class = BarberSerializer
 
+@extend_schema(tags=['Servicios'])
 class ManageBarbersView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Barbers.objects.all()
     serializer_class = BarberSerializer
 
+@extend_schema(tags=['Servicios'])
 class SchedulesView(generics.ListCreateAPIView):
     queryset = Schedules.objects.all()
     serializer_class = ScheduleSerializer
 
+@extend_schema(tags=['Servicios'])
 class ManageSchedulesView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Schedules.objects.all()
     serializer_class = ScheduleSerializer
 
 @extend_schema(
+    tags=['Servicios'],
     parameters=[
         OpenApiParameter(
             name='day_of_week',

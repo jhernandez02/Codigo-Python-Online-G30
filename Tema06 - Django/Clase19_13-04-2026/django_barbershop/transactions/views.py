@@ -4,7 +4,9 @@ from .serializers import AppointmentSerializer
 from .nubefact import send_nubefact_invoice
 from rest_framework.response import Response
 from rest_framework import status
+from drf_spectacular.utils import extend_schema
 
+@extend_schema(tags=['Transacciones'])
 class AppointmentsView(generics.ListCreateAPIView):
     queryset = Appointments.objects.all()
     serializer_class = AppointmentSerializer
