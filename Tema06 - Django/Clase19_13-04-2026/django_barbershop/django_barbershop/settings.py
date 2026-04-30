@@ -124,6 +124,43 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Esta es una API para aplicaciones de barbershops',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'CONTACT': {
+        'name': 'Soporte Técnico Barbershop',
+        'url': 'https://barbershop.com/soporte',
+        'email': 'soporte@barbershop.com'
+    },
+    'LICENSE': {
+        'name': 'MIT License'
+    },
+    'SERVERS': [
+        {
+            'url': 'http://127.0.0.1:8000',
+            'description': 'Servidor de pruebas'
+        },
+        {
+            'url': 'https://api.barbershop.com',
+            'description': 'Servidor de producción'
+        }
+    ],
+    'SECURITY': [
+        {
+            'JWT': []
+        }
+    ],
+    'TAGS': [
+        {
+            'name': 'Servicios',
+            'description': 'Endpoints para los servicios'
+        },
+        {
+            'name': 'Transacciones',
+            'description': 'Endpoints para las transacciones'
+        },
+        {
+            'name': 'Usuarios',
+            'description': 'Endpoints para los usuarios'
+        }
+    ]
 }
 
 NUBEFACT = {
