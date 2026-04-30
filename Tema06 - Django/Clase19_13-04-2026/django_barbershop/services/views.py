@@ -13,10 +13,12 @@ from .serializers import (
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from datetime import time
+from rest_framework.permissions import IsAuthenticated
 
 class ServicesView(generics.ListCreateAPIView):
     queryset = Services.objects.all()
     serializer_class = ServiceSerializer
+    permission_classes = [IsAuthenticated]
 
 class ManageServicesView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Services.objects.all()

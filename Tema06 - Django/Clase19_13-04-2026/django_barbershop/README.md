@@ -19,4 +19,7 @@ filterwarnings=ignore::DeprecationWarning
 
 ```bash
 pytest -v -rA -s
+# -v: Muestra el nombre de cada test y su resultado
+# -rA: Muestra un resumen detallado al final.
+# -s: Desactiva la captura stdout. Permite ver los print() que tengan en el codigo.
 ```
