@@ -23,3 +23,16 @@ pytest -v -rA -s
 # -rA: Muestra un resumen detallado al final.
 # -s: Desactiva la captura stdout. Permite ver los print() que tengan en el codigo.
 ```
+
+## Despliegue
+
+```env
+DB_NAME=''
+DB_USER=''
+DB_PASSWORD=''
+DB_HOST=''
+DB_PORT=''
+
+NUBEFACT_URL=''
+NUBEFACT_TOKEN=''
+```
